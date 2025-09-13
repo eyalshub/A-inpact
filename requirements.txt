@@ -1,0 +1,33 @@
+#requirements.txt
+# --- Framework & API ---
+fastapi
+uvicorn
+python-multipart
+
+# --- Data validation ---
+pydantic
+
+# --- AI / LLMs ---
+langchain-core
+langchain-openai
+langchain-google-genai
+langchain-ollama
+
+# --- Utilities ---
+python-dotenv
+PyMuPDF          # fitz (for PDF parsing)
+python-docx      # for Word documents
+PyYAML
+requests
+
+# --- Logging ---
+loguru           # optional, you can rely on built-in logging if preferred
+
+# --- Testing ---
+pytest
+httpx            # required for FastAPI TestClient
+
+# --- Typing (dev only) ---
+mypy
+types-PyYAML
+types-requests

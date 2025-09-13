@@ -1,0 +1,42 @@
+system: |
+  You are a Regulatory AI expert. Your role is to analyze structured regulatory requirements and create a customized compliance report for a business need. You receive all the rules that fit the client.
+  Be precise, clear and professional.
+
+user: |
+  Below is the business profile and the list of compliant regulatory rules (in JSON format).
+
+  Please review the content and generate a **Regulatory Compliance Report** in Markdown format.
+
+  ✦ The entire report must be written in **Hebrew (he-IL)**, including all section titles, content, explanations, and recommendations.
+  ✦ Do **not** use any English words in the report unless they appear in the input JSON or are proper names (e.g., OpenAI, ISO 22000).
+  ✦ Use clear, professional, and accessible Hebrew – suitable for small business owners without legal or regulatory background.
+  ✦ Avoid overly formal or academic language. Prioritize clarity, conciseness, and actionability.
+  ✦ Use **second-person** phrasing where applicable (e.g., “עליך”, “מומלץ שתוודא”).
+  ✦ Keep each explanation or recommendation between **1–3 sentences**. Use bullet points for clarity.
+  ✦ For each regulation, include one sentence explaining why it applies based on the business profile.
+  ✦ Clearly label each regulation as either **חובה** (legally required) or **מומלץ** (recommended), based on the regulatory classification.
+  ✦ Optionally, for critical regulations, include a short note describing the potential **risk of non-compliance** (e.g., fines, license delays, safety hazards).
+  ✦ Ensure that all regulations provided in the JSON input are addressed and reflected in the report (either in full detail or summary).
+  ✦ Do not omit any relevant sections unless explicitly instructed.
+  ✦ Maintain a consistent logical order across sections (e.g., group by regulatory body or theme).
+  ✦ When quoting specific law sections (e.g., סעיף 4-2.6), include only the **title** or **main idea** – avoid copying full legal text.
+  ✦ Use full Hebrew names for all regulatory bodies (e.g., "משטרת ישראל", "משרד הבריאות") and avoid abbreviations unless present in the input.
+  ✦ All column headers and values in the summary table must be written in Hebrew.
+
+  ✦ Structure the report using **Markdown** as follows:
+    - A main title (`#`) with the business name and report type.
+    - An introduction section (`##`) summarizing the business profile and purpose of the report.
+    - A "Critical Regulations" section (`##`) listing key requirements.
+        - Each rule must have a subtitle (`###`), a clear explanation, a חובה/מומלץ label, and an optional risk note.
+    - A "Recommended Regulations" section (`##`) for additional relevant guidelines.
+    - A summary table section (`##`) summarizing all rules:
+        | גוף רגולטורי | סעיף תקנה | עדיפות | חובה/מומלץ | המלצה |
+    - A "Next Steps" section (`##`) listing 3–5 actionable steps for the business owner.
+    - A disclaimer section (`##`) that states the report is not legal advice.
+
+  ✦ Do **not** add any commentary, explanation, or content outside the report body.
+  ✦ If any information is missing, use best judgment to complete the report.
+
+  ---
+  JSON input:
+  {json_input}

@@ -1,0 +1,67 @@
+A-IMPACT/
+├── backend/
+│   ├── main.py
+│   ├── config.py
+│   ├── routes/
+│   │   ├── questionnaire.py
+│   │   └── report.py
+│   ├── models/
+│   │   └── user_input.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── matcher.py
+│   │   └── report_generator.py
+│   │   ├── regulation_parser.py
+│   │   ├── matcher_from_regdoc.py
+│   │   ├── full_pipeline.py 
+│   ├── utils/
+│   │   ├── llm_client.py
+│   │   └── logging_config.py
+│   ├── scripts/
+│   │   ├── __init__.py
+│   │   └── extract_regulations.py
+│   │   └── build_regulations_json.py
+│   │   └── compile_rules_from_regdoc.py
+│   │   └── run_match_example.py
+│   ├── prompts/
+│   │   └── report_prompt.yaml
+│   └── tests/
+│       ├── conftest.py
+│       ├── test_extract_regulations.py
+│       ├── test_matcher.py
+│       ├── test_questionnaire_api.py
+│       ├── test_report_generator.py
+│       └── test_endpoints.py
+│       ├── test_llm_client_google.py
+│       ├── test_llm_client_ollama.py
+│   └── config.py
+│   └── main.py
+|   └── frontend/
+|    │   ├── index.html
+|    │   ├── script.js
+|    │   └── styles.css
+│   ├── data/
+│   │   └── processed/
+│   |   |   └──   
+│   |   |   └──   
+|   │   └── rew/
+│   |   |   └──   18-07-2022_4.2A.docx
+│   |   |   └──   18-07-2022_4.2A.pdf
+│   |   └── matches/
+│   |   |   └──   
+│   |   └── report/
+│   |   |   └── 
+├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   └── styles.css
+├── .env.example
+├── .env
+├── .gitignore
+├── requirements.txt
+├── README.md
+├── ARCHITECTURE.txt
+├── משימה.md
+
+└── docs/
+    └── architecture.png

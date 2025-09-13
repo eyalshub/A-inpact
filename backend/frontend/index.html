@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>A-Impact Licensing Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>מערכת הערכת רישוי עסקים</h1>
+  <form id="pipelineForm">
+
+    <!-- Basic Info -->
+    <label>שם העסק: <input type="text" id="business_name" required></label>
+    <label>שטח (מ"ר): <input type="number" id="area_sqm" required></label>
+    <label>מספר מקומות ישיבה: <input type="number" id="num_seats" required></label>
+
+    <!-- Food & Kitchen -->
+    <label>מגיש בשר:
+      <select id="has_meat">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+    <label>מגיש חלבי:
+      <select id="serves_dairy">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+    <label>כשר:
+      <select id="is_kosher">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+    <label>שימוש בגז:
+      <select id="uses_gas">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+    <label>טיגון (צ'יפסר):
+      <select id="uses_fryer">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+    <label>גריל גז / אש פתוחה:
+      <select id="uses_gas_grill">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+
+    <!-- Services -->
+    <label>משלוחים:
+      <select id="delivers">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+
+    <!-- Beverages -->
+    <label>מגיש אלכוהול:
+      <select id="has_alcohol">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+
+    <!-- Seating & Location -->
+    <label>ישיבה במקום:
+      <select id="has_seating">
+        <option value="true">כן</option>
+        <option value="false">לא</option>
+      </select>
+    </label>
+    <label>עסק פתוח לגמרי (open-air):
+      <select id="is_open_air">
+        <option value="false">לא</option>
+        <option value="true">כן</option>
+      </select>
+    </label>
+
+    <button type="submit">הרץ פייפליין</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("pipelineForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const button = e.target.querySelector("button");
+      button.disabled = true;
+      button.textContent = "מריץ...";
+
+      // התאמה מלאה ל-BusinessProfile
+      const profile = {
+        business_name: document.getElementById("business_name").value,
+        area_sqm: parseInt(document.getElementById("area_sqm").value),
+        num_seats: parseInt(document.getElementById("num_seats").value),
+        has_meat: document.getElementById("has_meat").value === "true",
+        serves_dairy: document.getElementById("serves_dairy").value === "true",
+        is_kosher: document.getElementById("is_kosher").value === "true",
+        uses_gas: document.getElementById("uses_gas").value === "true",
+        uses_fryer: document.getElementById("uses_fryer").value === "true",
+        uses_gas_grill: document.getElementById("uses_gas_grill").value === "true",
+        delivers: document.getElementById("delivers").value === "true",
+        has_alcohol: document.getElementById("has_alcohol").value === "true",
+        has_seating: document.getElementById("has_seating").value === "true",
+        is_open_air: document.getElementById("is_open_air").value === "true"
+      };
+
+      const payload = {
+        profile: profile,
+        source_doc_path: "data/rew/18-07-2022_4.2A.pdf",
+        output_dir: "output/"
+      };
+
+      console.log("📤 Payload שנשלח ל-Backend:", payload);
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/v1/pipeline/run_json", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+      const data = await response.json();
+      document.getElementById("result").innerHTML =
+        data.status === "success"
+          ? `<h2>✅ דוח נוצר בהצלחה</h2><pre style="white-space: pre-wrap; text-align:right;">${data.report_text}</pre>`
+          : `<p style="color:red;">❌ שגיאה: ${data.detail || JSON.stringify(data)}</p>`;
+      } catch (err) {
+        document.getElementById("result").innerText = "⚠️ שגיאה בחיבור לשרת: " + err;
+      } finally {
+        button.disabled = false;
+        button.textContent = "הרץ פייפליין";
+      }
+    });
+  </script>
+</body>
+</html>
