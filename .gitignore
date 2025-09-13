@@ -32,3 +32,6 @@ build/
 # Temporary
 *.tmp
 *.bak
+
+# Auto-generated outputs
+output/
